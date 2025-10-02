@@ -1,8 +1,8 @@
 import {NextResponse} from "next/server";
 
 export function GET() {
-	return NextResponse.json({m:"helloooooo"})
+	return NextResponse.json({m:"mmmm"})
 }
-export function POST() {
-	return NextResponse.json({m:"helloooooo"})
-}
+// export function DELETE() {
+// 	return NextResponse.json({m:"helloooooo"})
+// }

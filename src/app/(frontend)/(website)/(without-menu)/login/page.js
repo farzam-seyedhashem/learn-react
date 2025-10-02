@@ -20,7 +20,7 @@ export default function Home() {
 		<>
 			<div className={"bg-white flex items-center justify-center h-dvh w-full"}>
 				<div className={"relative w-11/12 md:w-3/12 p-6 border border-zinc-300 rounded-3xl "}>
-					<Link href={"/"} >
+					<Link href={"/public"} >
 					<button
 						className={"flex items-center justify-center absolute top-6 right-6 text-black w-10 h-10 rounded-full hover:bg-black/8"}>
 						<Icon>
