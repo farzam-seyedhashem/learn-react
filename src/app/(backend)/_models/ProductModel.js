@@ -33,55 +33,51 @@ const productSchema = new Schema({
         min: 0,
         max: 100
     },
-    finalPrice: {
-        type: Number,
-        min: 0
-    },
-    category: {
-        type: Schema.Types.ObjectId,
-        ref: 'Category',
-        required: true
-    },
-    brand: {
-        type: Schema.Types.ObjectId,
-        ref: 'Brand',
-        required: true
-    },
-    images: [{
-        type: String,
-        required: true
-    }],
-    thumbnail: {
-        type: String,
-        required: true
-    },
-    stock: {
-        type: Number,
-        required: true,
-        min: 0
-    },
-    ratingsAverage: {
-        type: Number,
-        default: 0,
-        min: 0,
-        max: 5
-    },
-    ratingsQuantity: {
-        type: Number,
-        default: 0,
-        min: 0
-    },
-    isAvailable: {
-        type: Boolean,
-        default: true
-    },
-    attributes: [{
-        name: { type: String, required: true },
-        value: { type: String, required: true }
-    }],
-    tags: [{
-        type: String
-    }],
+    // category: {
+    //     type: Schema.Types.ObjectId,
+    //     ref: 'Category',
+    //     required: true
+    // },
+    // brand: {
+    //     type: Schema.Types.ObjectId,
+    //     ref: 'Brand',
+    //     required: true
+    // },
+    // images: [{
+    //     type: String,
+    //     required: true
+    // }],
+    // thumbnail: {
+    //     type: String,
+    //     required: true
+    // },
+    // stock: {
+    //     type: Number,
+    //     required: true,
+    //     min: 0
+    // },
+    // ratingsAverage: {
+    //     type: Number,
+    //     default: 0,
+    //     min: 0,
+    //     max: 5
+    // },
+    // ratingsQuantity: {
+    //     type: Number,
+    //     default: 0,
+    //     min: 0
+    // },
+    // isAvailable: {
+    //     type: Boolean,
+    //     default: true
+    // },
+    // attributes: [{
+    //     name: { type: String, required: true },
+    //     value: { type: String, required: true }
+    // }],
+    // tags: [{
+    //     type: String
+    // }],
     seller: {
         type: Schema.Types.ObjectId,
         ref: 'User'

@@ -1,3 +1,4 @@
+import mongoose from 'mongoose'
 import { Schema, model, models } from "mongoose";
 
 import bcrypt from 'bcrypt';
@@ -47,5 +48,6 @@ UserSchema.pre('save', async function(next) {
     next(error);
   }
 });
-
-export default models.User || model("User", UserSchema);
+export function UserModel() {
+  return mongoose.models.User || mongoose.model('User', UserSchema);
+}

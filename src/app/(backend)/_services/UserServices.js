@@ -1,5 +1,5 @@
 import dbConnect from "../_lib/dbConnect";
-import User from "../_models/UserModel";
+import {User} from "../_models/index";
 import { getPlainObject } from "../_lib/PlainObject";
 
 /**
