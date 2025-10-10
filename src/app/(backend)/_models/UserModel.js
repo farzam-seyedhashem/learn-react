@@ -1,53 +1,56 @@
-import mongoose from 'mongoose'
 import { Schema, model, models } from "mongoose";
+import bcrypt from 'bcryptjs';
 
-import bcrypt from 'bcrypt';
 const UserSchema = new Schema({
-  name: {
-    type: String,
-    required: [true, "Please provide a name"],
-    maxlength: [60, "Name cannot be more than 60 characters"],
-  },
-  email: {
-    type: String,
-    required: [true, "Please provide an email"],
-    unique: true,
-    match: [
-      /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
-      "Please add a valid email",
-    ],
-  },
-  password: {
-    type: String,
-    required: [true, "Please provide a password"],
-    minlength: [6, "Password cannot be less than 6 characters"],
-  },
-  role: {
-    type: String,
-    enum: ['user', 'admin'],
-    default: 'user',
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
+    name: {
+        type: String,
+        required: [true, "لطفا نام خود را وارد کنید"],
+        maxlength: [60, "نام نمی‌تواند بیشتر از ۶۰ کاراکتر باشد"],
+    },
+    email: {
+        type: String,
+        required: [true, "لطفا ایمیل خود را وارد کنید"],
+        unique: true,
+        match: [
+            /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+            "لطفا یک ایمیل معتبر وارد کنید",
+        ],
+    },
+    password: {
+        type: String,
+        required: [true, "لطفا رمز عبور خود را وارد کنید"],
+        minlength: [6, "رمز عبور نمی‌تواند کمتر از ۶ کاراکتر باشد"],
+        select: false, // ۱. مخفی کردن پسورد در کوئری‌ها
+    },
+    role: {
+        type: String,
+        enum: ['user', 'admin'],
+        default: 'user',
+    },
+}, {
+    timestamps: true // ۲. مدیریت خودکار زمان ساخت و به‌روزرسانی
 });
 
-// Mongoose pre-save hook to hash password before saving
-UserSchema.pre('save', async function(next) {
-  // Only hash the password if it has been modified (or is new)
-  if (!this.isModified('password')) {
-    return next();
-  }
-
-  try {
-    const salt = await bcrypt.genSalt(10);
-    this.password = await bcrypt.hash(this.password, salt);
-    next();
-  } catch (error) {
-    next(error);
-  }
+// هش کردن پسورد قبل از ذخیره
+UserSchema.pre('save', async function (next) {
+    if (!this.isModified('password')) {
+        return next();
+    }
+    try {
+        const salt = await bcrypt.genSalt(10);
+        this.password = await bcrypt.hash(this.password, salt);
+        next();
+    } catch (error) {
+        next(error);
+    }
 });
-export function UserModel() {
-  return mongoose.models.User || mongoose.model('User', UserSchema);
-}
+
+// ۳. متد مقایسه پسورد
+UserSchema.methods.comparePassword = async function (enteredPassword) {
+    return await bcrypt.compare(enteredPassword, this.password);
+};
+
+// ۴. استانداردسازی خروجی مدل
+const UserModel = models.User || model('User', UserSchema);
+
+export default UserModel;

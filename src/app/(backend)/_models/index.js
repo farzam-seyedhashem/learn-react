@@ -1,5 +1,6 @@
-import {UserModel} from "@/app/(backend)/_models/UserModel";
-import {ProductModel} from "@/app/(backend)/_models/ProductModel";
+import UserModel from "./UserModel"; // تغییر از named import به default import
+import {ProductModel} from "./ProductModel";
 
-export const User = UserModel()
-export const Product = ProductModel()
+// UserModel دیگر یک تابع نیست، بلکه خود مدل است
+export const User = UserModel;
+export const Product = ProductModel;

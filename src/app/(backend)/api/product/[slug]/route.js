@@ -1,6 +1,6 @@
 import {NextResponse} from "next/server";
 import {getProductByIdServices, updateProductService, deleteProductService} from '@/app/(backend)/_services/ProductServices';
-import {getPlainObject} from "@/app/(backend)/_lib/PlainObject";
+import {getPlainObject} from "@/app/(backend)/_lib/PlainObject";import mongoose from 'mongoose'
 
 export async function GET(request, { params }) {
     try {

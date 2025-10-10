@@ -20,7 +20,7 @@ export async function saveProductController(data) {
 export async function updateProductController(id, data) {
     await dbConnect();
     // { new: true } returns the updated document
-    return await Product.findByIdAndUpdate(id, data, { new: true, runValidators: true });
+    return await Product.findByIdAndUpdate(id, data, {new: true, runValidators: true});
 }
 
 export async function deleteProductController(id) {

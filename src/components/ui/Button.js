@@ -3,11 +3,11 @@
 import {useState} from "react";
 
 
-export default function Button({children,className}){
-	const [b,setB] = useState(false);
-	return(
-		<button onClick={()=>setB(!b)} className={`
-        ${b?"bg-gradient-to-b from-purple-400 to-blue-500":"text-white bg-red-500"}
+export default function Button({children, className}) {
+    const [b, setB] = useState(false);
+    return (
+        <button onClick={() => setB(!b)} className={`
+        ${b ? "bg-gradient-to-b from-purple-400 to-blue-500" : "text-white bg-red-500"}
     
         h-[40px]
         rounded-[8px]
@@ -16,8 +16,8 @@ export default function Button({children,className}){
         ${className}
         `}>
 
-			{children}
-		</button>
-	)
+            {children}
+        </button>
+    )
 }
 

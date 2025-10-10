@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+
 const Schema = mongoose.Schema;
 
 const productSchema = new Schema({
@@ -84,15 +85,15 @@ const productSchema = new Schema({
     }
 }, {
     timestamps: true,
-    toJSON: { virtuals: true },
-    toObject: { virtuals: true }
+    toJSON: {virtuals: true},
+    toObject: {virtuals: true}
 });
 
-productSchema.virtual('calculatedFinalPrice').get(function() {
+productSchema.virtual('calculatedFinalPrice').get(function () {
     return this.price * (1 - this.discountPercentage / 100);
 });
 
-productSchema.pre('save', function(next) {
+productSchema.pre('save', function (next) {
     if (this.isModified('price') || this.isModified('discountPercentage')) {
         this.finalPrice = this.price * (1 - this.discountPercentage / 100);
     }
